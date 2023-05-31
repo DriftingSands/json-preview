@@ -6,13 +6,17 @@ import { linter, lintGutter } from "@codemirror/lint";
 
 function App() {
   const [data, setData] = useState({status: "Waiting for data...", message: "please create some data using the CF-editor."})
+  const params = new URLSearchParams(window.location.search)
+
   useEffect(() => {
     const dataHandler = (event) => {
       if (event.data.type !== "setCfData") {
         return;
       }
       setData(event.data.payload.data);
-      console.log("event.data.payload.data:\n", event.data.payload.data)
+      if (params.get("logPayload") === 'true') {
+        console.log("event.data.payload.data:\n", event.data.payload.data)
+      }
     };
 
     window.addEventListener("message", dataHandler);
