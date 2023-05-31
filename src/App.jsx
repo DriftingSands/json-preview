@@ -12,6 +12,7 @@ function App() {
         return;
       }
       setData(event.data.payload.data);
+      console.log("event.data.payload.data:\n", event.data.payload.data)
     };
 
     window.addEventListener("message", dataHandler);
